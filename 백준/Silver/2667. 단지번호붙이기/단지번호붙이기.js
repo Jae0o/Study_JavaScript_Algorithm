@@ -2,6 +2,7 @@ const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().trim().split('\n')
 const N = +input.shift()
+
 const graph = Array.from({ length: N }, (_, i) => {
   const arr = []
   for (let j = 0; j < N; j += 1) {
@@ -16,35 +17,40 @@ const checkLIst = [
   [0, -1], // 왼
   [1, 0], // 아래
   [0, 1] // 오른
-]
-let totalCount = 0
+];
+
+let totalCount = 0;
 const result = [];
+
 for (let i = 0; i < N; i += 1) {
   for (let j = 0; j < N; j += 1) {
 
     if (graph[i][j]) {
-
       const queue = [[i, j]]
       graph[i][j] = false
       let visitedCount = 0;
 
       while (queue.length !== 0) {
-        const [left, right] = queue.shift()
+        const [L, R] = queue.shift()
 
-        for (const [checkLeft, checkRight] of checkLIst) {
-          const checkL = left + checkLeft;
-          const checkR = right + checkRight;
+        for (const [addL, addR] of checkLIst) {
+          const checkL = L + addL;
+          const checkR = R + addR;
 
-          if (checkL !== -1 && checkR !== -1 && checkL !== N && checkR !== N && graph[checkL][checkR]) {
+          if (checkL === -1 || checkR === -1 || checkL === N || checkR === N) {
+            continue;
+          }
+
+          if (graph[checkL][checkR]) {
             graph[checkL][checkR] = false;
             queue.push([checkL, checkR])
           }
         }
+        
         visitedCount += 1
       }
+
       result.push(visitedCount)
-
-
       totalCount += 1
     }
   }
