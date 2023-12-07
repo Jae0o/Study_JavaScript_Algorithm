@@ -33,8 +33,7 @@ function solution(arr) {
     }
 
     if (order[0] === "5") {
-      const value = stack.length ? stack[stack.length - 1] : -1;
-      result.push(value);
+      stack.length ? result.push(stack[stack.length - 1]) : result.push("-1");
     }
   }
 
