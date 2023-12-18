@@ -113,4 +113,3 @@ function BFS([a, b, c], array) {
 }
 BFS(input, array)
 
-
