@@ -1,50 +1,21 @@
-`use strict`;
 
 const rl = require("readline").createInterface(process.stdin, process.stdout);
-let inputs = [];
+let inputs = "";
 
 rl.on("line", (input) => {
-  inputs = input.split(".");
+  inputs = input;
 }).on("close", () => {
-  console.log(solution(inputs));
+  solution(inputs);
 });
 
-function solution(arr) {
-  let result = [];
+function solution(text) {
+  let result = text.replace(/XXXX/g, "AAAA");
+  result = result.replace(/XX/g, "BB");
 
-  for (const item of arr) {
-    if (item.length % 2 !== 0) {
-      result = "-1";
-      break;
-    }
-
-    if (item === "") {
-      result.push("");
-      continue;
-    }
-
-    if (item.length === 2) {
-      result.push("BB");
-      continue;
-    }
-
-    for (let i = 1; 1; i++) {
-      const num = i * 4;
-      if (num === item.length) {
-        result.push("AAAA".repeat(i));
-        break;
-      }
-
-      if (num + 2 === item.length) {
-        result.push("AAAA".repeat(i) + "BB");
-        break;
-      }
-    }
+  if (result.includes("X")) {
+    console.log("-1");
+    return;
   }
 
-  if (result === "-1") {
-    return result;
-  }
-
-  return result.join(".");
+  return console.log(result);
 }
