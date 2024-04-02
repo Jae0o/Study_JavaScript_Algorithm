@@ -11,17 +11,20 @@ rl.on("line", (input) => {
 });
 
 function solution(N, K, list) {
-  let maximumTemp = -999;
+  let checkValue = 0;
 
-  for (let i = 0; i <= N - K; i++) {
-    let sumTemp = 0;
+  for (let i = 0; i < K; i++) {
+    checkValue += list[i];
+  }
 
-    for (let j = 0; j < K; j++) {
-      sumTemp += list[i + j];
-    }
+  let maximumTemp = checkValue;
 
-    if (maximumTemp < sumTemp) {
-      maximumTemp = sumTemp;
+  for (let i = 0; i < N - K; i++) {
+    checkValue -= list[i];
+    checkValue += list[i + K];
+
+    if (maximumTemp < checkValue) {
+      maximumTemp = checkValue;
     }
   }
 
