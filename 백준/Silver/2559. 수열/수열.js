@@ -20,7 +20,9 @@ function solution(N, K, list) {
       sumTemp += list[i + j];
     }
 
-    maximumTemp = Math.max(sumTemp, maximumTemp);
+    if (maximumTemp < sumTemp) {
+      maximumTemp = sumTemp;
+    }
   }
 
   console.log(maximumTemp);
