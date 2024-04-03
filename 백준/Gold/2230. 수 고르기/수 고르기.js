@@ -17,24 +17,24 @@ function solution(N, M, list) {
 
   let result = Infinity;
 
-  while (front <= back && back < N) {
+  while (front < N && back < N) {
     const subtractValue = Math.abs(sortedList[front] - sortedList[back]);
+
+    if (subtractValue < M && back >= N) {
+      return console.log(result);
+    }
 
     if (subtractValue < M) {
       back++;
       continue;
     }
 
-    if (subtractValue > M) {
+    if (subtractValue >= M) {
       front++;
 
       if (result > subtractValue) {
         result = subtractValue;
       }
-    }
-
-    if (subtractValue === M) {
-      return console.log(subtractValue);
     }
   }
 
