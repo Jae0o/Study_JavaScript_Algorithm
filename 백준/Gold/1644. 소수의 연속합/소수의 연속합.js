@@ -21,7 +21,7 @@ function solution(N) {
 
   let count = 0;
 
-  while (front <= back && back !== primeListLength) {
+  while (back !== primeListLength) {
     if (sumValue <= N) {
       if (sumValue === N) {
         count++;
@@ -41,11 +41,9 @@ function solution(N) {
 
 function makePrimeList(num) {
   const primeList = [];
-  const isVisited = [
-    false,
-    false,
-    ...Array.from({ length: num - 1 }, () => true),
-  ];
+  const isVisited = new Array(num + 1).fill(true);
+  isVisited[0] = false;
+  isVisited[1] = false;
 
   for (let i = 2; i <= num; i++) {
     if (!isVisited[i]) {
