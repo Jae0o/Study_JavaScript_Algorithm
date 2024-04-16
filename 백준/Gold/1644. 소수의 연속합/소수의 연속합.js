@@ -62,18 +62,12 @@ function makePrimeList(num) {
       continue;
     }
 
+    primeList.push(i);
+
     for (let j = i * 2; j <= num; j += i) {
       isVisited[j] = false;
     }
   }
-
-  isVisited.forEach((isPrime, index) => {
-    if (!isPrime) {
-      return;
-    }
-
-    primeList.push(index);
-  });
 
   return primeList;
 }
