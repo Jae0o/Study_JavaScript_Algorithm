@@ -10,13 +10,7 @@ rl.on("line", (input) => {
 });
 
 function solution(N) {
-  const primeList = [];
-
-  for (let i = 2; i <= N; i++) {
-    if (isPrime(i)) {
-      primeList.push(i);
-    }
-  }
+  const primeList = makePrimeList(N);
 
   const primeListLength = primeList.length;
 
@@ -55,12 +49,31 @@ function solution(N) {
   console.log(count);
 }
 
-function isPrime(num) {
-  for (let i = 2; i * i <= num; i++) {
-    if (num % i === 0) {
-      return false;
+function makePrimeList(num) {
+  const primeList = [];
+  const isVisited = [
+    false,
+    false,
+    ...Array.from({ length: num - 1 }, () => true),
+  ];
+
+  for (let i = 2; i <= num; i++) {
+    if (!isVisited[i]) {
+      continue;
+    }
+
+    for (let j = i * 2; j <= num; j += i) {
+      isVisited[j] = false;
     }
   }
 
-  return true;
+  isVisited.forEach((isPrime, index) => {
+    if (!isPrime) {
+      return;
+    }
+
+    primeList.push(index);
+  });
+
+  return primeList;
 }
