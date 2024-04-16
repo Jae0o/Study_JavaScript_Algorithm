@@ -21,22 +21,12 @@ function solution(N) {
 
   let count = 0;
 
-  while (front <= back) {
-    if (sumValue === N) {
-      count++;
-
-      if (back === primeListLength - 1) {
-        sumValue -= primeList[front];
-        front++;
-        continue;
+  while (front <= back && back !== primeListLength) {
+    if (sumValue <= N) {
+      if (sumValue === N) {
+        count++;
       }
 
-      back++;
-      sumValue += primeList[back];
-      continue;
-    }
-
-    if (sumValue < N) {
       back++;
       sumValue += primeList[back];
       continue;
@@ -64,7 +54,7 @@ function makePrimeList(num) {
 
     primeList.push(i);
 
-    for (let j = i * 2; j <= num; j += i) {
+    for (let j = i * i; j <= num; j += i) {
       isVisited[j] = false;
     }
   }
