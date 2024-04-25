@@ -10,22 +10,20 @@ rl.on("line", (input) => {
 });
 
 function solution(N) {
-  const list = Array.from({ length: N + 1 }, (_, index) => index + 1);
-
-  let increase = 0;
-  let current = 0;
+  let increase = 1;
+  let current = 1;
 
   const result = [];
 
   while (increase <= current && current <= N) {
-    const currentWeight = list[current] * list[current];
-    const increaseWeight = list[increase] * list[increase];
+    const currentWeight = Math.pow(current, 2);
+    const increaseWeight = Math.pow(increase, 2);
 
     const calc = currentWeight - increaseWeight;
 
     if (calc <= N) {
       if (calc === N) {
-        result.push(list[current]);
+        result.push(current);
       }
 
       current++;
