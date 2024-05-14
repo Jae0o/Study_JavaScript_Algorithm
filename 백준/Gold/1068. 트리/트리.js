@@ -16,10 +16,10 @@ function solution(N, list, remove) {
   const graph = {};
 
   for (let i = 0; i < N; i++) {
-    graph[i] = [];
-  }
+    if (!graph[i]) {
+      graph[i] = [];
+    }
 
-  for (let i = 0; i < N; i++) {
     if (list[i] === -1) {
       rootNumber = i;
       continue;
@@ -27,6 +27,10 @@ function solution(N, list, remove) {
 
     if (i === remove || list[i] === remove) {
       continue;
+    }
+
+    if (!graph[list[i]]) {
+      graph[list[i]] = [];
     }
 
     graph[list[i]].push(i);
@@ -39,7 +43,6 @@ function solution(N, list, remove) {
   graph[remove] = [];
 
   const visited = new Array(N).fill(false);
-  // visited[rootNumber] = true;
 
   const stack = [rootNumber];
 
