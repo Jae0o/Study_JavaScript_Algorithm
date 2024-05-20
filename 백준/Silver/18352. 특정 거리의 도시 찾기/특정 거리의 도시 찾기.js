@@ -26,10 +26,13 @@ function solution([N, M, K, X], list) {
 
   const queue = [X];
   visited[X] = 0;
+
   const result = [];
 
-  while (queue.length) {
-    const point = queue.shift();
+  let index = 0;
+
+  while (queue.length > index) {
+    const point = queue[index++];
 
     if (visited[point] === K) {
       result.push(point);
