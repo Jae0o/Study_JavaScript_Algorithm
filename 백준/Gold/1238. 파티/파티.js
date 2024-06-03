@@ -132,11 +132,15 @@ function solution(N, M, X, list) {
 
   const result = di(X);
 
+  let value = 0;
+
   for (let i = 1; i <= N; i++) {
     const go = di(i);
 
-    result[i] = result[i] + go[X];
+    if (value < result[i] + go[X]) {
+      value = result[i] + go[X];
+    }
   }
 
-  console.log(Math.max(...result.slice(1, N + 1)));
+  console.log(value);
 }
