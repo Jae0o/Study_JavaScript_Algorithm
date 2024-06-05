@@ -22,7 +22,7 @@ function solution(N, M, list) {
         const distance = i - m;
 
         if (n + distance >= N) {
-          continue;
+          break;
         }
 
         if (
