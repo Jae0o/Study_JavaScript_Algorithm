@@ -21,6 +21,7 @@ function solution(N, list) {
     for (let j = 1; j < N; j++) {
       if (list[j][i] !== current) {
         isSame = false;
+        break;
       }
     }
 
